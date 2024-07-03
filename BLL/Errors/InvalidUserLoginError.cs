@@ -1,12 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BLL.Errors
+﻿namespace BLL.Errors
 {
-    internal class InvalidUserLoginError
+    public class InvalidUserLoginError : Exception
     {
+        public InvalidUserLoginError()
+        {
+        }
+
+        public InvalidUserLoginError(string message) : base(message)
+        {
+        }
     }
 }

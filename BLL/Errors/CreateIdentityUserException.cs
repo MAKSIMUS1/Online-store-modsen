@@ -1,12 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BLL.Errors
+﻿namespace BLL.Errors
 {
-    internal class CreateIdentityUserException
+    public class CreateIdentityUserException : Exception
     {
+        public CreateIdentityUserException()
+        {
+        }
+
+        public CreateIdentityUserException(string message) : base(message)
+        {
+        }
     }
 }

@@ -1,12 +1,12 @@
 ﻿namespace BLL.Errors
 {
-    public class UserLoginIsNotFound : Exception
+    public class UserLoginNotFound : Exception
     {
-        public UserLoginIsNotFound()
+        public UserLoginNotFound()
         {
         }
 
-        public UserLoginIsNotFound(string message) : base(message)
+        public UserLoginNotFound(string message) : base(message)
         {
         }
     }
