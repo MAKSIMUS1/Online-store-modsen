@@ -48,7 +48,7 @@ namespace BLL.Services.Implementations
         public async Task AddProductAsync(CreateProductDto productDto, CancellationToken cancellationToken = default = default)
         {
             var existingProduct = await _productRepository.FindByNameAsync(productDto.Name, cancellationToken);
-            if (existingProduct != null)
+            if (existingProduct is not null)
             {
                 throw new EntityAlreadyExistsException($"Product with name '{productDto.Name}' already exists.");
             }
