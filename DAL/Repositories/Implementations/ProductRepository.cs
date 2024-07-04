@@ -18,5 +18,9 @@ namespace DAL.Repositories.Implementations
         {
             return await _dbSet.Where(p => p.Id == categoryId).ToListAsync(cancellationToken);
         }
+        public async Task<Product> FindByNameAsync(string name, CancellationToken cancellationToken)
+        {
+            return await _dbSet.FirstOrDefaultAsync(p => p.Name == name, cancellationToken);
+        }
     }
 }

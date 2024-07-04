@@ -7,5 +7,8 @@ using System.Threading.Tasks;
 
 namespace DAL.Repositories.Interfaces
 {
-    public interface ICategoryRepository : IBaseRepository<Category> { }
+    public interface ICategoryRepository : IBaseRepository<Category> 
+    {
+        Task<Category> FindByNameAsync(string name, CancellationToken cancellationToken);
+    }
 }
