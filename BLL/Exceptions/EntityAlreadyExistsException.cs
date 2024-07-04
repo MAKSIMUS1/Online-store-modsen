@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BLL.Exceptions
 {
-    public class EntityAlreadyExistsException : Exception
+    public class EntityAlreadyExistsException : Exception 
     {
         public EntityAlreadyExistsException() : base() { }
 
