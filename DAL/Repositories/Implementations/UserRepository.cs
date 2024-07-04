@@ -1,6 +1,7 @@
 ﻿using DAL.Data;
 using DAL.Model;
 using DAL.Repositories.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,5 +13,9 @@ namespace DAL.Repositories.Implementations
     public class UserRepository : BaseRepository<User>, IUserRepository
     {
         public UserRepository(ApplicationDbContext context) : base(context) { }
+        public async Task<User> FindByUsernameAsync(string username, CancellationToken cancellationToken)
+        {
+            return await _dbSet.FirstOrDefaultAsync(u => u.Username == username, cancellationToken);
+        }
     }
 }

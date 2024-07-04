@@ -7,5 +7,8 @@ using System.Threading.Tasks;
 
 namespace DAL.Repositories.Interfaces
 {
-    public interface IUserRepository : IBaseRepository<User> { }
+    public interface IUserRepository : IBaseRepository<User> 
+    {
+        Task<User> FindByUsernameAsync(string username, CancellationToken cancellationToken);
+    }
 }

@@ -41,6 +41,11 @@ namespace BLL.Services.Implementations
 
         public async Task AddUserAsync(CreateUserDto userDto, CancellationToken cancellationToken = default)
         {
+            var existingUser = await _userRepository.FindByUsernameAsync(userDto.UserName, cancellationToken);
+            if (existingUser != null)
+            {
+                throw new EntityAlreadyExistsException($"User with username '{userDto.UserName}' already exists.");
+            }
             var user = _mapper.Map<User>(userDto);
             user.Id = Guid.NewGuid();
 

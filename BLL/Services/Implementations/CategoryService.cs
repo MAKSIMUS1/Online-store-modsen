@@ -41,6 +41,11 @@ namespace BLL.Services.Implementations
 
         public async Task AddCategoryAsync(CreateCategoryDto categoryDto, CancellationToken cancellationToken = default = default)
         {
+            var existingCategory = await _categoryRepository.FindByNameAsync(categoryDto.Name, cancellationToken);
+            if (existingCategory != null)
+            {
+                throw new EntityAlreadyExistsException($"Category with name '{categoryDto.Name}' already exists.");
+            }
             var category = _mapper.Map<Category>(categoryDto);
             category.Id = Guid.NewGuid();
 
