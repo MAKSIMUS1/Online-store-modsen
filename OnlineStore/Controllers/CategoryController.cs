@@ -33,15 +33,8 @@ namespace OnlineStore.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<CategoryDto>> GetCategory(Guid id, CancellationToken cancellationToken)
         {
-            try
-            {
-                var category = await _categoryService.GetCategoryByIdAsync(id, cancellationToken);
-                return Ok(category);
-            }
-            catch (KeyNotFoundException ex)
-            {
-                return NotFound(ex.Message);
-            }
+            var category = await _categoryService.GetCategoryByIdAsync(id, cancellationToken);
+            return Ok(category);
         }
 
         // POST: api/category
@@ -56,31 +49,17 @@ namespace OnlineStore.Controllers
         [HttpPut("{id}")]
         public async Task<ActionResult> UpdateCategory(Guid id, [FromBody] UpdateCategoryDto categoryDto, CancellationToken cancellationToken)
         {
-            try
-            {
-                categoryDto.Id = id;
-                await _categoryService.UpdateCategoryAsync(categoryDto, cancellationToken);
-                return NoContent();
-            }
-            catch (KeyNotFoundException ex)
-            {
-                return NotFound(ex.Message);
-            }
+            categoryDto.Id = id;
+            await _categoryService.UpdateCategoryAsync(categoryDto, cancellationToken);
+            return NoContent();
         }
 
         // DELETE: api/category/{id}
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteCategory(Guid id, CancellationToken cancellationToken)
         {
-            try
-            {
-                await _categoryService.DeleteCategoryAsync(id, cancellationToken);
-                return NoContent();
-            }
-            catch (KeyNotFoundException ex)
-            {
-                return NotFound(ex.Message);
-            }
+            await _categoryService.DeleteCategoryAsync(id, cancellationToken);
+            return NoContent();
         }
     }
 }

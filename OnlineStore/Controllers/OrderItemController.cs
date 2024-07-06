@@ -29,15 +29,8 @@ namespace OnlineStore.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<OrderItemDto>> GetOrderItem(Guid id, CancellationToken cancellationToken)
         {
-            try
-            {
-                var orderItem = await _orderItemService.GetOrderItemByIdAsync(id, cancellationToken);
-                return Ok(orderItem);
-            }
-            catch (KeyNotFoundException ex)
-            {
-                return NotFound(ex.Message);
-            }
+            var orderItem = await _orderItemService.GetOrderItemByIdAsync(id, cancellationToken);
+            return Ok(orderItem);
         }
 
         // POST: api/orderitem
@@ -52,31 +45,17 @@ namespace OnlineStore.Controllers
         [HttpPut("{id}")]
         public async Task<ActionResult> UpdateOrderItem(Guid id, [FromBody] UpdateOrderItemDto orderItemDto, CancellationToken cancellationToken)
         {
-            try
-            {
-                orderItemDto.Id = id; 
-                await _orderItemService.UpdateOrderItemAsync(orderItemDto, cancellationToken);
-                return NoContent();
-            }
-            catch (KeyNotFoundException ex)
-            {
-                return NotFound(ex.Message);
-            }
+            orderItemDto.Id = id; 
+            await _orderItemService.UpdateOrderItemAsync(orderItemDto, cancellationToken);
+            return NoContent();
         }
 
         // DELETE: api/orderitem/{id}
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteOrderItem(Guid id, CancellationToken cancellationToken)
         {
-            try
-            {
-                await _orderItemService.DeleteOrderItemAsync(id, cancellationToken);
-                return NoContent();
-            }
-            catch (KeyNotFoundException ex)
-            {
-                return NotFound(ex.Message);
-            }
+            await _orderItemService.DeleteOrderItemAsync(id, cancellationToken);
+            return NoContent();
         }
     }
 }

@@ -33,15 +33,8 @@ namespace OnlineStore.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<UserDto>> GetUser(Guid id, CancellationToken cancellationToken)
         {
-            try
-            {
-                var user = await _userService.GetUserByIdAsync(id, cancellationToken);
-                return Ok(user);
-            }
-            catch (KeyNotFoundException ex)
-            {
-                return NotFound(ex.Message);
-            }
+            var user = await _userService.GetUserByIdAsync(id, cancellationToken);
+            return Ok(user);
         }
 
         // POST: api/user
@@ -56,31 +49,17 @@ namespace OnlineStore.Controllers
         [HttpPut("{id}")]
         public async Task<ActionResult> UpdateUser(Guid id, [FromBody] UpdateUserDto userDto, CancellationToken cancellationToken)
         {
-            try
-            {
-                userDto.Id = id;
-                await _userService.UpdateUserAsync(userDto, cancellationToken);
-                return NoContent();
-            }
-            catch (KeyNotFoundException ex)
-            {
-                return NotFound(ex.Message);
-            }
+            userDto.Id = id;
+            await _userService.UpdateUserAsync(userDto, cancellationToken);
+            return NoContent();
         }
 
         // DELETE: api/user/{id}
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteUser(Guid id, CancellationToken cancellationToken)
         {
-            try
-            {
-                await _userService.DeleteUserAsync(id, cancellationToken);
-                return NoContent();
-            }
-            catch (KeyNotFoundException ex)
-            {
-                return NotFound(ex.Message);
-            }
+            await _userService.DeleteUserAsync(id, cancellationToken);
+            return NoContent();
         }
     }
 }

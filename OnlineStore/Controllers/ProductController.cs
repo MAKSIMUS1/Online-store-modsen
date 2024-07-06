@@ -30,15 +30,8 @@ namespace OnlineStore.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<ProductDto>> GetProduct(Guid id, CancellationToken cancellationToken)
         {
-            try
-            {
-                var product = await _productService.GetProductByIdAsync(id, cancellationToken);
-                return Ok(product);
-            }
-            catch (KeyNotFoundException ex)
-            {
-                return NotFound(ex.Message);
-            }
+            var product = await _productService.GetProductByIdAsync(id, cancellationToken);
+            return Ok(product);
         }
 
         // GET: api/product/category/{categoryId}
@@ -61,31 +54,17 @@ namespace OnlineStore.Controllers
         [HttpPut("{id}")]
         public async Task<ActionResult> UpdateProduct(Guid id, [FromBody] UpdateProductDto productDto, CancellationToken cancellationToken)
         {
-            try
-            {
-                productDto.Id = id;
-                await _productService.UpdateProductAsync(productDto, cancellationToken);
-                return NoContent();
-            }
-            catch (KeyNotFoundException ex)
-            {
-                return NotFound(ex.Message);
-            }
+            productDto.Id = id;
+            await _productService.UpdateProductAsync(productDto, cancellationToken);
+            return NoContent();
         }
 
         // DELETE: api/product/{id}
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteProduct(Guid id, CancellationToken cancellationToken)
         {
-            try
-            {
-                await _productService.DeleteProductAsync(id, cancellationToken);
-                return NoContent();
-            }
-            catch (KeyNotFoundException ex)
-            {
-                return NotFound(ex.Message);
-            }
+            await _productService.DeleteProductAsync(id, cancellationToken);
+            return NoContent();
         }
     }
 }

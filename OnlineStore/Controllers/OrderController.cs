@@ -33,15 +33,8 @@ namespace OnlineStore.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<OrderDto>> GetOrder(Guid id, CancellationToken cancellationToken)
         {
-            try
-            {
-                var order = await _orderService.GetOrderByIdAsync(id, cancellationToken);
-                return Ok(order);
-            }
-            catch (KeyNotFoundException ex)
-            {
-                return NotFound(ex.Message);
-            }
+            var order = await _orderService.GetOrderByIdAsync(id, cancellationToken);
+            return Ok(order);
         }
 
         // GET: api/order/user/{userId}
@@ -64,31 +57,17 @@ namespace OnlineStore.Controllers
         [HttpPut("{id}")]
         public async Task<ActionResult> UpdateOrder(Guid id, [FromBody] UpdateOrderDto orderDto, CancellationToken cancellationToken)
         {
-            try
-            {
-                orderDto.Id = id;
-                await _orderService.UpdateOrderAsync(orderDto, cancellationToken);
-                return NoContent();
-            }
-            catch (KeyNotFoundException ex)
-            {
-                return NotFound(ex.Message);
-            }
+            orderDto.Id = id;
+            await _orderService.UpdateOrderAsync(orderDto, cancellationToken);
+            return NoContent();
         }
 
         // DELETE: api/order/{id}
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteOrder(Guid id, CancellationToken cancellationToken)
         {
-            try
-            {
-                await _orderService.DeleteOrderAsync(id, cancellationToken);
-                return NoContent();
-            }
-            catch (KeyNotFoundException ex)
-            {
-                return NotFound(ex.Message);
-            }
+            await _orderService.DeleteOrderAsync(id, cancellationToken);
+            return NoContent();
         }
     }
 }
