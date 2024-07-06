@@ -7,10 +7,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Services\Implementations\**" />
+    <EmbeddedResource Remove="Services\Implementations\**" />
+    <None Remove="Services\Implementations\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="DTO\Request\" />
     <Folder Include="DTO\Response\" />
     <Folder Include="Services\Interfaces\" />
-    <Folder Include="Services\Implementations\" />
     <Folder Include="ValidatorsDTO\" />
   </ItemGroup>
 
