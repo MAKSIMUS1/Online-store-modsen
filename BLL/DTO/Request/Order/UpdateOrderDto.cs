@@ -9,6 +9,7 @@ namespace BLL.DTO.Request.Order
 {
     public class UpdateOrderDto
     {
+        public Guid Id { get; set; }
         public Guid UserId { get; set; }
     }
 }
