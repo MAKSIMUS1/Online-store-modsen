@@ -7,7 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+<<<<<<< Updated upstream
     <Folder Include="DTO\Request\" />
+=======
+>>>>>>> Stashed changes
     <Folder Include="DTO\Response\" />
     <Folder Include="Services\Interfaces\" />
     <Folder Include="Services\Implementations\" />

@@ -15,5 +15,7 @@ namespace BLL.Service.Interface
         Task AddUserAsync(CreateUserDto userDto, CancellationToken cancellationToken);
         Task UpdateUserAsync(UpdateUserDto userDto, CancellationToken cancellationToken);
         Task DeleteUserAsync(Guid userId, CancellationToken cancellationToken);
+
+        Task<UserDto> LoginAsync(LoginUserDto userDto , CancellationToken cancellation);
     }
 }
