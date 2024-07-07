@@ -7,10 +7,12 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+
 using Microsoft.IdentityModel.Tokens;
 using OnlineStore.JwtOptions;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
+
 
 namespace OnlineStore.Controllers
 {
@@ -67,6 +69,7 @@ namespace OnlineStore.Controllers
         }
 
 
+
         // Post: api/user/login
         [HttpPost("login")]
         public async Task<ActionResult> LoginUser([FromBody] LoginUserDto userDto, HttpContext context, CancellationToken cancellationToken)
@@ -95,6 +98,7 @@ namespace OnlineStore.Controllers
             }
             return Ok(user);
         }
+
 
     }
 }

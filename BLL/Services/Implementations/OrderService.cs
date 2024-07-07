@@ -57,11 +57,13 @@ namespace BLL.Services.Implementations
 
         public async Task UpdateOrderAsync(UpdateOrderDto orderDto, CancellationToken cancellationToken = default)
         {
-            var existingOrder = await _orderRepository.GetByIdAsync(orderDto.UserId, cancellationToken);
+
+            var existingOrder = await _orderRepository.GetByIdAsync(orderDto.Id, cancellationToken);
 
             if (existingOrder is null)
             {
-                throw new EntityNotFoundException($"Order with Id '{orderDto.UserId}' not found.");
+                throw new EntityNotFoundException($"Order with Id '{orderDto.Id}' not found.");
+
             }
 
             _mapper.Map(orderDto, existingOrder);

@@ -24,13 +24,16 @@ namespace BLL.Services.Implementations
             _mapper = mapper;
         }
 
-        public async Task<IEnumerable<ProductDto>> GetAllProductsAsync(CancellationToken cancellationToken = default)
+
+        public async Task<IEnumerable<ProductDto>> GetAllProductsAsync(CancellationToken cancellationToken = default = default)
+
         {
             var products = await _productRepository.GetAllAsync(cancellationToken);
             return _mapper.Map<IEnumerable<ProductDto>>(products);
         }
 
-        public async Task<ProductDto> GetProductByIdAsync(Guid productId, CancellationToken cancellationToken = default)
+
+        public async Task<ProductDto> GetProductByIdAsync(Guid productId, CancellationToken cancellationToken = default = default)
         {
             var product = await _productRepository.GetByIdAsync(productId, cancellationToken);
             if (product is null)
@@ -39,13 +42,15 @@ namespace BLL.Services.Implementations
             return _mapper.Map<ProductDto>(product);
         }
 
-        public async Task<IEnumerable<ProductDto>> GetProductsByCategoryAsync(Guid categoryId, CancellationToken cancellationToken = default)
+
+        public async Task<IEnumerable<ProductDto>> GetProductsByCategoryAsync(Guid categoryId, CancellationToken cancellationToken = default = default)
         {
             var products = await _productRepository.GetByCategoryAsync(categoryId, cancellationToken);
             return _mapper.Map<IEnumerable<ProductDto>>(products);
         }
 
-        public async Task AddProductAsync(CreateProductDto productDto, CancellationToken cancellationToken = default)
+
+        public async Task AddProductAsync(CreateProductDto productDto, CancellationToken cancellationToken = default = default)
         {
             var existingProduct = await _productRepository.FindByNameAsync(productDto.Name, cancellationToken);
             if (existingProduct is not null)
@@ -58,7 +63,8 @@ namespace BLL.Services.Implementations
             await _productRepository.AddAsync(product, cancellationToken);
         }
 
-        public async Task UpdateProductAsync(UpdateProductDto productDto, CancellationToken cancellationToken = default)
+
+        public async Task UpdateProductAsync(UpdateProductDto productDto, CancellationToken cancellationToken = default = default)
         {
             var existingProduct = await _productRepository.GetByIdAsync(productDto.Id, cancellationToken);
             if (existingProduct is null)
@@ -69,7 +75,8 @@ namespace BLL.Services.Implementations
             await _productRepository.UpdateAsync(existingProduct, cancellationToken);
         }
 
-        public async Task DeleteProductAsync(Guid productId, CancellationToken cancellationToken = default)
+
+        public async Task DeleteProductAsync(Guid productId, CancellationToken cancellationToken = default = default)
         {
             var existingProduct = await _productRepository.GetByIdAsync(productId, cancellationToken);
             if (existingProduct is null)

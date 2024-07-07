@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace DAL.Repositories.Interfaces
 {
-<<<<<<< Updated upstream
+
     public interface IUserRepository : IBaseRepository<User> { }
-=======
+
     public interface IUserRepository : IBaseRepository<User> 
     {
         Task<User> FindByUsernameAsync(string username, CancellationToken cancellationToken);
@@ -17,5 +17,11 @@ namespace DAL.Repositories.Interfaces
         Task<User> LoginAsync(string email, string passwordHash, CancellationToken cancellationToken);
 
     }
->>>>>>> Stashed changes
+
+
+    public interface IUserRepository : IBaseRepository<User> 
+    {
+        Task<User> FindByUsernameAsync(string username, CancellationToken cancellationToken);
+    }
+
 }

@@ -24,13 +24,14 @@ namespace BLL.Services.Implementations
             _mapper = mapper;
         }
 
-        public async Task<IEnumerable<CategoryDto>> GetAllCategoriesAsync(CancellationToken cancellationToken = default )
+        public async Task<IEnumerable<CategoryDto>> GetAllCategoriesAsync(CancellationToken cancellationToken = default = default)
         {
             var categories = await _categoryRepository.GetAllAsync(cancellationToken);
             return _mapper.Map<IEnumerable<CategoryDto>>(categories);
         }
 
-        public async Task<CategoryDto> GetCategoryByIdAsync(Guid categoryId, CancellationToken cancellationToken = default )
+
+        public async Task<CategoryDto> GetCategoryByIdAsync(Guid categoryId, CancellationToken cancellationToken = default = default)
         {
             var category = await _categoryRepository.GetByIdAsync(categoryId, cancellationToken);
             if (category is null)
@@ -39,7 +40,8 @@ namespace BLL.Services.Implementations
             return _mapper.Map<CategoryDto>(category);
         }
 
-        public async Task AddCategoryAsync(CreateCategoryDto categoryDto, CancellationToken cancellationToken = default )
+
+        public async Task AddCategoryAsync(CreateCategoryDto categoryDto, CancellationToken cancellationToken = default = default)
         {
             var existingCategory = await _categoryRepository.FindByNameAsync(categoryDto.Name, cancellationToken);
             if (existingCategory is not null)
@@ -52,7 +54,8 @@ namespace BLL.Services.Implementations
             await _categoryRepository.AddAsync(category, cancellationToken);
         }
 
-        public async Task UpdateCategoryAsync(UpdateCategoryDto categoryDto, CancellationToken cancellationToken = default )
+
+        public async Task UpdateCategoryAsync(UpdateCategoryDto categoryDto, CancellationToken cancellationToken = default = default)
         {
             var existingCategory = await _categoryRepository.GetByIdAsync(categoryDto.Id, cancellationToken);
             if (existingCategory is null)
@@ -63,7 +66,8 @@ namespace BLL.Services.Implementations
             await _categoryRepository.UpdateAsync(existingCategory, cancellationToken);
         }
 
-        public async Task DeleteCategoryAsync(Guid categoryId, CancellationToken cancellationToken = default )
+
+        public async Task DeleteCategoryAsync(Guid categoryId, CancellationToken cancellationToken = default = default)
         {
             var existingCategory = await _categoryRepository.GetByIdAsync(categoryId, cancellationToken);
             if (existingCategory is null)
