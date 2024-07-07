@@ -30,6 +30,7 @@ namespace BLL.Services.Implementations
             return _mapper.Map<IEnumerable<CategoryDto>>(categories);
         }
 
+
         public async Task<CategoryDto> GetCategoryByIdAsync(Guid categoryId, CancellationToken cancellationToken = default = default)
         {
             var category = await _categoryRepository.GetByIdAsync(categoryId, cancellationToken);
@@ -38,6 +39,7 @@ namespace BLL.Services.Implementations
 
             return _mapper.Map<CategoryDto>(category);
         }
+
 
         public async Task AddCategoryAsync(CreateCategoryDto categoryDto, CancellationToken cancellationToken = default = default)
         {
@@ -52,6 +54,7 @@ namespace BLL.Services.Implementations
             await _categoryRepository.AddAsync(category, cancellationToken);
         }
 
+
         public async Task UpdateCategoryAsync(UpdateCategoryDto categoryDto, CancellationToken cancellationToken = default = default)
         {
             var existingCategory = await _categoryRepository.GetByIdAsync(categoryDto.Id, cancellationToken);
@@ -62,6 +65,7 @@ namespace BLL.Services.Implementations
 
             await _categoryRepository.UpdateAsync(existingCategory, cancellationToken);
         }
+
 
         public async Task DeleteCategoryAsync(Guid categoryId, CancellationToken cancellationToken = default = default)
         {

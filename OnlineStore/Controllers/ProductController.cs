@@ -4,6 +4,9 @@ using BLL.DTO.Request.Product;
 using BLL.DTO.Response;
 using BLL.Service.Interface;
 
+using Microsoft.AspNetCore.Authorization;
+
+
 
 namespace OnlineStore.Controllers
 {
@@ -43,6 +46,9 @@ namespace OnlineStore.Controllers
         }
 
         // POST: api/product
+
+        [Authorize]
+
         [HttpPost]
         public async Task<ActionResult> AddProduct([FromBody] CreateProductDto productDto, CancellationToken cancellationToken)
         {
@@ -61,6 +67,9 @@ namespace OnlineStore.Controllers
 
         // DELETE: api/product/{id}
         [HttpDelete("{id}")]
+
+        [Authorize]
+
         public async Task<ActionResult> DeleteProduct(Guid id, CancellationToken cancellationToken)
         {
             await _productService.DeleteProductAsync(id, cancellationToken);

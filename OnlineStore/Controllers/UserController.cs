@@ -8,6 +8,12 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
+using Microsoft.IdentityModel.Tokens;
+using OnlineStore.JwtOptions;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+
+
 namespace OnlineStore.Controllers
 {
     [Route("api/[controller]")]
@@ -61,5 +67,38 @@ namespace OnlineStore.Controllers
             await _userService.DeleteUserAsync(id, cancellationToken);
             return NoContent();
         }
+
+
+
+        // Post: api/user/login
+        [HttpPost("login")]
+        public async Task<ActionResult> LoginUser([FromBody] LoginUserDto userDto, HttpContext context, CancellationToken cancellationToken)
+        {
+            var user = await _userService.LoginAsync(userDto, cancellationToken);
+            if (user != null)
+            {
+                var claims = new List<Claim> { new Claim(ClaimTypes.Name, user.UserName), new Claim(ClaimTypes.Email, user.Email) };
+                var jwt = new JwtSecurityToken(
+                        issuer: AuthOptions.ISSUER,
+                        audience: AuthOptions.AUDIENCE,
+                        claims: claims,
+                        expires: DateTime.UtcNow.Add(TimeSpan.FromMinutes(10)),
+                        signingCredentials: new SigningCredentials(AuthOptions.GetSymmetricSecurityKey(), SecurityAlgorithms.HmacSha256));
+
+                var token = new JwtSecurityTokenHandler().WriteToken(jwt);
+
+                context.Response.Cookies.Append("jwtToken", token, new CookieOptions
+                {
+                    HttpOnly = true,
+                    Secure = true, 
+                    SameSite = SameSiteMode.Strict 
+                });
+        
+
+            }
+            return Ok(user);
+        }
+
+
     }
 }
